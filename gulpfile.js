@@ -6,12 +6,14 @@ const minify = require("gulp-clean-css");
 const terser = require("gulp-terser");
 const imageMin = require("gulp-imagemin");
 const imageWebp = require("gulp-webp");
+const concat = require("gulp-concat");
 
 //define tasks
 //compile sass
 function compileSass() {
-  return src("src/scss/*.scss")
+  return src("src/scss/global.scss")
     .pipe(sass().on("error", sass.logError))
+    .pipe(concat("styles.css"))
     .pipe(autoprefixer("last 2 versions"))
     .pipe(minify())
     .pipe(dest("dist/css"));
